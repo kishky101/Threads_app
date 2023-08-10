@@ -7,8 +7,10 @@ import { fetchUser, fetchUsers } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { redirect } from 'next/navigation';
+import CommunitySearch from "@/components/forms/CommunitySearch";
+import Searchbar from "@/components/shared/Searchbar";
 
-async function Page() {
+async function Page({ searchParams} : { searchParams : {[key: string] : string | undefined}}) {
     const user = await currentUser();
 
     if(!user) return null;
@@ -20,16 +22,15 @@ async function Page() {
     // Fetch communities
 
     const result = await fetchCommunities({
-        searchString: '',
-        pageNumber: 1,
+        searchString: searchParams?.q,
+        pageNumber: searchParams?.page ? +searchParams?.page : 1,
         pageSize: 25
     })
 
     return (
         <section>
-            <h1 className="head-text mb-10">Search</h1>
-
-        {/* Search bar */}
+        
+        <Searchbar routeType="communities" />
 
         <div className="mt-14 flex flex-col gap-9">
             {result.communities.length === 0 ? (

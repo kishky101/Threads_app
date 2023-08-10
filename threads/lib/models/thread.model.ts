@@ -23,9 +23,33 @@ const threadSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Thread'
         }
+    ],
+    likes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
     ]
 })
+threadSchema.add({likes: [
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
+]})
 
 const Thread = mongoose.models.Thread || mongoose.model('Thread', threadSchema);
 
 export default Thread;
+
+
+
+
+// Access the existing model (replace 'YourModel' with the actual model name)
+// const existingModel = mongoose.model('threadSchema');
+
+// Delete the existing model
+// mongoose.deleteModel('threadSchema');
+
+// Create the new model
+// const newModel = mongoose.model('threadSchema', threadSchema);

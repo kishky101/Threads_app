@@ -153,8 +153,8 @@ export async function fetchCommunities({
     const isNext = totalCommunitiesCount > skipAmount + communities.length;
 
     return { communities, isNext };
-  } catch (error) {
-    console.error("Error fetching communities:", error);
+  } catch (error: any) {
+    console.error("Error fetching communities:", error.message);
     throw error;
   }
 }
@@ -194,9 +194,9 @@ export async function addMemberToCommunity(
     await user.save();
 
     return community;
-  } catch (error) {
+  } catch (error: any) {
     // Handle any errors
-    console.error("Error adding member to community:", error);
+    console.error("Error adding member to community:", error.message);
     throw error;
   }
 }

@@ -18,7 +18,7 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import { CommentValidation } from "@/lib/validations/thread";
 import Image from "next/image";
-import { addCommentTothread } from "@/lib/actions/thread.action";
+import { addCommentToThread } from "@/lib/actions/thread.action";
 // import { createThread } from "@/lib/actions/thread.action";
 
 
@@ -41,7 +41,7 @@ const Comment = ({ threadId, currentUserImg, currentUserId }: commentProps) => {
     });
 
     const onSubmit = async (values: z.infer<typeof CommentValidation>) => {
-        await addCommentTothread(
+        await addCommentToThread(
             threadId, 
             values.thread, 
             JSON.parse(currentUserId), 
